@@ -1,0 +1,265 @@
+\documentclass[11pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\setcounter{secnumdepth}{3}
+\renewcommand{\thesection}{\arabic{section}}
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    \includegraphics[width=3.4cm,height=2.6cm]{College Logo Grayscale.jpg}\\[0.5cm]
+    \vspace{1cm}
+    \textbf{\large A Course End Project Report on}\\[0.5cm]
+    {\LARGE \textbf{Vehicle Rental Management System}}\\[1.5cm]
+    {\Large Course End Project}\\[1.5cm]
+    \textbf{Submitted by}\\[0.25cm]
+    Batch No. [Enter Batch Number]
+    \begin{center}
+    \begin{table}[h!]
+    \centering
+    \setstretch{1}
+    \begin{tabular}{l l}
+    Name of Student 1 & Roll Number 1\\[2mm]
+    Name of Student 2 & Roll Number 2\\[2mm]
+    Name of Student 3 & Roll Number 3\\[2mm]
+    \end{tabular}
+    \end{table}
+    \end{center}
+    \textbf{Course Facilitator}\\[0.075in]
+    [Faculty Name]\\
+    \textbf{[Designation]}\\[3cm]
+    {\large\textbf{Department of [Department Name]}}\\[0.5cm]
+    {\large\textbf{[College Name], Hyderabad}}\\[0.5cm]
+    {\large\textbf{October 2026}}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\section*{Abstract}
+\addcontentsline{toc}{section}{Abstract}
+Vehicle rental businesses manage vehicle details, customer information, bookings, rental periods, payments, and returns. When these activities are recorded manually, staff may face duplicate bookings, calculation errors, delayed record retrieval, and difficulty tracking vehicle availability. This project proposes a Vehicle Rental Management System that organizes these activities through a simple computer-based application. The system allows an authorized administrator to register vehicles and customers, check availability, create and update bookings, calculate rental charges, and record vehicle returns and payments. A database stores the information in a structured manner and supports faster searching and reporting. The system is intended as an academic prototype that demonstrates how database management and application programming can improve the daily workflow of a small rental agency. Future versions can include online reservations, payment-gateway integration, identity verification, GPS tracking, and automated notifications.
+
+\textbf{Keywords:} Vehicle rental, booking management, vehicle availability, customer records, database, rental charges, return management.
+
+\newpage
+\section{Introduction}
+Vehicle rental services provide cars, bikes, vans, and other vehicles for short-term use. Rental operators must coordinate vehicle availability, customer records, booking dates, rental prices, and return status. Maintaining all these details in notebooks or separate spreadsheets can become difficult as the number of vehicles and customers increases.
+
+The Vehicle Rental Management System provides a centralized way to maintain rental operations. An administrator can add vehicle details, register customers, create bookings, and calculate the amount due based on rental duration and the vehicle's daily rate. The system checks whether a vehicle is already booked for the requested period before confirming a new booking. This helps reduce scheduling conflicts and makes information easier to retrieve.
+
+\section{Problem Statement}
+Manual rental management can lead to incorrect records, overlapping reservations, slow customer service, and mistakes in rental-charge calculations. A centralized system is required to maintain consistent records and make vehicle booking, return, and payment operations easier to manage.
+
+\section{Objectives}
+\begin{itemize}
+\item To maintain vehicle information such as registration number, type, model, and rental rate.
+\item To store customer details in a structured database.
+\item To check vehicle availability before confirming a booking.
+\item To calculate rental charges using rental duration and daily rate.
+\item To record booking status, vehicle return, and payment information.
+\item To generate useful summaries of vehicles, bookings, and rental transactions.
+\item To improve accuracy, accessibility, and efficiency in rental-office operations.
+\end{itemize}
+
+\section{Scope of the Project}
+The initial version is designed for a small vehicle rental office and an authorized administrator. It covers vehicle registration, customer registration, booking creation, availability checks, rental-cost calculation, returns, and payment records. Online customer accounts, live GPS tracking, digital identity verification, and third-party payment services are outside the basic prototype and can be added later.
+
+\section{Literature Review}
+Traditional rental agencies often use paper registers or spreadsheets to track vehicles and bookings. These methods are easy to start with but can become difficult to maintain when records grow. Database-driven management applications improve consistency by storing related information in tables and using queries to retrieve it.
+
+Reservation systems commonly use a vehicle inventory, customer records, booking dates, and transaction information. A useful system must also validate inputs, prevent overlapping bookings, and protect administrative functions. This project applies these general software-engineering and database principles to a small-scale vehicle rental workflow. The proposed design is educational and should be tested against the requirements of any real rental business before deployment.
+
+\section{Existing System and Proposed System}
+\subsection{Existing System}
+In a manual process, staff may record bookings in notebooks or spreadsheets. Availability may need to be checked across multiple records, and charges may be calculated separately. This can increase the possibility of human error and make reporting slower.
+
+\subsection{Proposed System}
+The proposed application stores vehicle, customer, booking, and payment information in a central database. It checks availability for the selected dates, calculates estimated charges, and updates the booking when a vehicle is returned. Authorized users can search records and view basic reports.
+
+\begin{longtable}{|p{3.5cm}|p{5cm}|p{5cm}|}
+\caption{Comparison of existing and proposed systems}\\
+\hline
+\textbf{Feature} & \textbf{Manual System} & \textbf{Proposed System}\\ \hline
+Record storage & Paper registers or separate files & Centralized database\\ \hline
+Availability checking & Manual cross-checking & Date and status validation\\ \hline
+Charge calculation & May be calculated manually & Automatically calculated from rate and duration\\ \hline
+Searching & Time-consuming for large records & Searchable vehicle and booking records\\ \hline
+Reports & Prepared manually & Basic booking and rental summaries\\ \hline
+\end{longtable}
+
+\section{Requirements Analysis}
+\subsection{Functional Requirements}
+\begin{itemize}
+\item Admin login and access to management features.
+\item Add, view, update, and remove vehicle records where appropriate.
+\item Register and update customer information.
+\item Create bookings with start date, end date, and selected vehicle.
+\item Validate that the selected vehicle is available for the requested period.
+\item Calculate the rental estimate using the daily rate and billable duration.
+\item Record return date, payment amount, and booking status.
+\item Search and display vehicle, customer, and booking details.
+\end{itemize}
+
+\subsection{Non-Functional Requirements}
+\begin{itemize}
+\item \textbf{Usability:} Screens and forms should be clear and easy to navigate.
+\item \textbf{Reliability:} Required fields and dates should be validated before saving.
+\item \textbf{Security:} Administrative functions should require authentication.
+\item \textbf{Performance:} Common searches should return results within a reasonable time.
+\item \textbf{Maintainability:} Code should be organized into modules for easier updates.
+\item \textbf{Data integrity:} Unique vehicle registration numbers and valid booking references should be enforced.
+\end{itemize}
+
+\section{System Design and Methodology}
+\subsection{System Modules}
+\begin{enumerate}
+\item \textbf{Admin Module:} Provides authorized access to system functions.
+\item \textbf{Vehicle Module:} Stores registration number, vehicle type, model, daily rate, and availability status.
+\item \textbf{Customer Module:} Stores customer name and contact details required for a booking.
+\item \textbf{Booking Module:} Records vehicle, customer, booking dates, and booking status.
+\item \textbf{Billing Module:} Calculates rental charges and records payment details.
+\item \textbf{Return Module:} Records vehicle return and changes the booking status.
+\item \textbf{Report Module:} Displays vehicle lists, bookings, and transaction summaries.
+\end{enumerate}
+
+\subsection{System Workflow}
+\begin{enumerate}
+\item The administrator signs in to the application.
+\item The administrator registers vehicles and customer details.
+\item A requested vehicle and rental period are selected.
+\item The system checks for conflicting bookings.
+\item If the vehicle is available, the booking is saved.
+\item The rental estimate is calculated using the daily rate and duration.
+\item On return, the actual return details and payment are recorded.
+\item The booking is marked completed and the vehicle becomes available when no other booking conflicts.
+\end{enumerate}
+
+\subsection{Database Design}
+The database can be implemented using MySQL or another relational database system. Suggested tables are shown below.
+
+\begin{longtable}{|p{3cm}|p{3.4cm}|p{7cm}|}
+\caption{Suggested database tables}\\
+\hline
+\textbf{Table} & \textbf{Primary Key} & \textbf{Important Fields}\\ \hline
+Vehicle & vehicle\_id & registration\_no, type, model, daily\_rate, status\\ \hline
+Customer & customer\_id & full\_name, phone, email, address\\ \hline
+Booking & booking\_id & customer\_id, vehicle\_id, start\_date, end\_date, status, estimated\_cost\\ \hline
+Payment & payment\_id & booking\_id, amount, payment\_date, payment\_method, payment\_status\\ \hline
+ReturnRecord & return\_id & booking\_id, actual\_return\_date, condition\_notes, additional\_charges\\ \hline
+\end{longtable}
+
+Customer ID and vehicle ID in the Booking table act as foreign keys. Booking dates must be valid, and a vehicle must not have overlapping active bookings. In a production system, this validation should be protected by database transactions so two users cannot reserve the same vehicle at the same time.
+
+\subsection{Rental Charge Calculation}
+For a simple daily-rate model, the estimated charge can be calculated as:
+
+\[
+\mathrm{Rental\ Charge} = \mathrm{Billable\ Days} \times \mathrm{Daily\ Rate}
+\]
+
+Billable days should be at least one and must follow the rental agency's policy. For example, if a vehicle costs Rs. 1,500 per day and is booked for 3 billable days, the estimated rental charge is Rs. 4,500. Taxes, deposits, late fees, discounts, and additional charges are not included in this basic example and should be handled according to the business rules.
+
+\section{Technology Stack}
+The project can be implemented using the following technologies; these are suggested options and can be adjusted to match the course requirements.
+\begin{itemize}
+\item \textbf{Frontend:} Java Swing or a web interface using HTML, CSS, and JavaScript.
+\item \textbf{Backend:} Java for application logic.
+\item \textbf{Database:} MySQL for persistent storage.
+\item \textbf{Database connectivity:} JDBC when Java is used.
+\item \textbf{Development tools:} IntelliJ IDEA, Eclipse, NetBeans, or Visual Studio Code, and MySQL Workbench.
+\end{itemize}
+
+\section{Implementation Plan}
+\begin{enumerate}
+\item Create the database and tables with primary-key and foreign-key constraints.
+\item Build forms for vehicle and customer registration.
+\item Implement booking-date validation and vehicle-availability checking.
+\item Add rental-charge calculation and booking confirmation.
+\item Implement return and payment-recording features.
+\item Add search, update, and report screens.
+\item Test valid and invalid inputs, overlapping dates, missing data, and payment records.
+\end{enumerate}
+
+\section{Testing and Results}
+The following test cases can be used to evaluate the prototype. Enter the actual result after running the implementation; do not report a test as passed until it has been executed.
+
+\begin{longtable}{|p{1cm}|p{4cm}|p{5cm}|p{3cm}|}
+\caption{Proposed test cases}\\
+\hline
+\textbf{No.} & \textbf{Test} & \textbf{Expected Result} & \textbf{Actual Result}\\ \hline
+1 & Add a vehicle with valid details & Vehicle record is saved & To be tested\\ \hline
+2 & Add duplicate registration number & Duplicate is rejected & To be tested\\ \hline
+3 & Create booking for available dates & Booking is saved & To be tested\\ \hline
+4 & Book same vehicle for overlapping dates & Conflicting booking is rejected & To be tested\\ \hline
+5 & Enter end date before start date & Validation message is shown & To be tested\\ \hline
+6 & Calculate charge for valid duration & Correct estimated charge is shown & To be tested\\ \hline
+7 & Record vehicle return & Booking status is updated & To be tested\\ \hline
+8 & Search for an existing booking & Matching booking details are displayed & To be tested\\ \hline
+\end{longtable}
+
+The expected outcome is a more organized workflow with fewer manual calculations and easier retrieval of records. Actual performance and correctness must be confirmed through implementation and testing. The system's reliability depends on proper date validation, access control, and database integrity.
+
+\section{Security and Limitations}
+Customer contact details should only be collected when necessary and should be protected from unauthorized access. Passwords should not be stored as plain text; a production application should use secure password hashing, role-based permissions, backups, and encrypted connections where appropriate. The academic prototype may not include live vehicle tracking, online payments, automated identity checks, or insurance and licensing verification. These features require additional design, compliance review, and testing.
+
+\section{Future Enhancements}
+\begin{itemize}
+\item Online customer registration and self-service reservations.
+\item Integration with a trusted payment gateway.
+\item Email or SMS booking reminders and return notifications.
+\item GPS-based tracking and fleet monitoring, where lawful and appropriate.
+\item Digital rental agreements and document management.
+\item Mobile-friendly interface and dashboard analytics.
+\item Maintenance scheduling and service-history tracking.
+\end{itemize}
+
+\section{Mapping POs and SDGs}
+\subsection{Program Outcomes (POs) Mapping}
+\begin{longtable}{|p{1.5cm}|p{5cm}|p{6.5cm}|}
+\caption{Mapping of Program Outcomes to project relevance}\\
+\hline
+\textbf{PO No.} & \textbf{Program Outcome} & \textbf{Relevance}\\ \hline
+PO1 & Engineering Knowledge & Applies programming, database, and software-design concepts.\\ \hline
+PO2 & Problem Analysis & Identifies inefficiencies in manual rental operations.\\ \hline
+PO3 & Design/Development of Solutions & Designs modules for vehicles, customers, bookings, and billing.\\ \hline
+PO5 & Modern Tool Usage & Uses a programming environment and database tools.\\ \hline
+PO8 & Ethics & Encourages responsible handling of customer information.\\ \hline
+PO10 & Communication & Presents rental information in organized forms and reports.\\ \hline
+\end{longtable}
+
+\subsection{Sustainable Development Goals (SDGs) Mapping}
+\begin{longtable}{|p{2cm}|p{5cm}|p{6cm}|}
+\caption{Mapping of SDGs to project relevance}\\
+\hline
+\textbf{SDG No.} & \textbf{Goal} & \textbf{Relevance}\\ \hline
+SDG 9 & Industry, Innovation and Infrastructure & Encourages digital tools for small rental businesses.\\ \hline
+SDG 11 & Sustainable Cities and Communities & Can support organized access to shared transport options.\\ \hline
+SDG 12 & Responsible Consumption and Production & Better fleet records may help businesses monitor vehicle use and maintenance.\\ \hline
+\end{longtable}
+
+\section{Conclusion}
+The Vehicle Rental Management System is designed to centralize vehicle, customer, booking, return, and payment information. Availability checks and automated rental estimates can reduce repetitive manual work and help staff access records more efficiently. The proposed design provides a foundation for a small rental-office application and can be expanded with online booking, payment integration, notifications, and fleet analytics. The final quality of the system depends on implementation, testing, security controls, and the rental business's specific policies.
+
+\begin{thebibliography}{99}
+\addcontentsline{toc}{section}{Bibliography}
+\bibitem{silberschatz}
+A. Silberschatz, H. F. Korth, and S. Sudarshan, \textit{Database System Concepts}, 7th ed., McGraw-Hill, 2019.
+\bibitem{pressman}
+R. S. Pressman and B. R. Maxim, \textit{Software Engineering: A Practitioner's Approach}, 9th ed., McGraw-Hill, 2020.
+\bibitem{mysql}
+Oracle, \textit{MySQL Reference Manual}. Available: \url{https://dev.mysql.com/doc/}
+\bibitem{java}
+Oracle, \textit{Java Documentation}. Available: \url{https://docs.oracle.com/en/java/}
+\bibitem{jdbc}
+Oracle, \textit{JDBC Basics}. Available: \url{https://docs.oracle.com/javase/tutorial/jdbc/}
+\end{thebibliography}
+\end{document}
